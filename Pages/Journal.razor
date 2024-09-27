@@ -1,0 +1,557 @@
+@page "/"
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+
+        font-family: "Lazy Dog";
+        color: rgb(51, 51, 51);
+    }
+
+
+    html {
+        background-color: black;
+    }
+
+    .containerMain {
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-size: 2rem;
+        font-family: "Lazy Dog";
+        font-weight: normal;
+        letter-spacing: 0.075rem;
+        color: rgb(51, 51, 51);
+    @*
+        overflow-x:
+        scroll;
+        *@
+    }
+
+    .book {
+        width: 1000px;
+        height: 700px;
+        padding: 5rem;
+        padding-top: 70px;
+        background: url("./assets/imgs/journal.png") 0% 0% / contain no-repeat;
+        min-width: 1000px;
+        min-height: 700px;
+    }
+
+
+    .ghostInfo {
+        position: absolute;
+        width: 23rem;
+        height: 35rem;
+    }
+
+
+    .evidence {
+        position: absolute;
+        margin-left: 26rem;
+        width: 23rem;
+        height: 35rem;
+        using Phasmo;
+    }
+
+
+    .evidenceCheckbox-group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .evidenceCheckbox-group div {
+        width: 48%;
+    }
+
+    input[type="checkbox"] {
+        display: none;
+    }
+
+    .evidCheckBox {
+        display: inline-block;
+        cursor: pointer;
+        font-size: 1.25rem;
+    }
+
+    .evidCheckBox::before {
+        content: "";
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #000;
+        margin-right: 8px;
+        vertical-align: middle;
+        vertical-align: top;
+        font-family: inherit;
+        line-height: 20px;
+    }
+
+    input[type="checkbox"]:checked+.evidCheckBox::before {
+        font-size: 2.5rem;
+        line-height: 1.6rem;
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgb(0, 0, 0);
+    }
+
+    .normal-state+.evidCheckBox::before {
+        content: "";
+        font-size: 2.5rem;
+        line-height: 1.6rem;
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgb(0, 0, 0);
+    }
+
+    .x-state+.evidCheckBox::before {
+        content: "X";
+        font-size: 2.5rem;
+        line-height: 1.6rem;
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgb(0, 0, 0);
+    }
+
+    .o-state+.evidCheckBox::before {
+        content: "";
+    }
+
+    .o-state+.evidCheckBox::after {
+        display: block;
+        content: " ";
+        height: 3px;
+        background: linear-gradient(90deg, rgb(51, 51, 51) 0%, rgb(51, 51, 51) 80%, rgba(0, 0, 0, 0) 100%);
+        width: 100%;
+        margin-top: -13px;
+        margin-left: -10px;
+    }
+
+    hr {
+        height: 3px;
+        background-color: #000;
+        border: none;
+        margin: 5px 0;
+        border-radius: 5px;
+    }
+
+    #checkbox-7 {
+        width: 225px;
+    }
+
+    input[type="checkbox"]:disabled+.evidCheckBox::before {
+        border: 2px solid #acab8b;
+    }
+
+    .ghostButton-group {
+        width: 100%;
+        height: 343px;
+
+    }
+
+    .ghostHeader {
+        text-align: center;
+        margin-inline: auto;
+        width: 85%;
+        font-size: 1.25rem;
+        margin-bottom: 10px;
+    }
+
+    .button-container {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+    }
+
+    .button-column {
+        flex: 0 0 33.33%;
+        margin: 0;
+        margin-top: -4px;
+    }
+
+    .button-column button {
+        background-color: transparent;
+        border: none;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 1.2rem;
+        margin-left: 20px;
+    }
+
+    .button-column .normal-state {
+        cursor: pointer;
+        outline: none;
+        width: 100px;
+        height: 10px;
+        background: none;
+        border-radius: 50%;
+        height: 36px;
+        opacity: 1;
+        padding: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .button-column .x-state {
+        cursor: pointer;
+        outline: none;
+        width: 100px;
+        height: 10px;
+        background: none;
+        border-radius: 50%;
+        height: 36px;
+        opacity: 1;
+        border: 3px solid rgb(0, 0, 0);
+        padding: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+
+    .button-column {
+        position: relative;
+    }
+
+    .button-column .o-state {
+        position: relative;
+        z-index: 2;
+    }
+
+    .button-column .o-state::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: block;
+        height: 3px;
+        width: 100px;
+        background: linear-gradient(90deg, rgb(51, 51, 51) 0%, rgb(51, 51, 51) 80%, rgba(0, 0, 0, 0) 100%);
+        z-index: 1;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+
+    .button-column .o-state {
+        margin-left: 3rem;
+    }
+</style>
+
+<div style="width: 100%;">
+    <div class="containerMain" style="width: 100%;">
+        <div class="book">
+            <div class="ghostInfo">
+
+            </div>
+            <div class="evidence">
+                <p>Evidence</p>
+                <hr>
+                <div class="evidenceCheckbox-group">
+                    @foreach (var checkbox in EvidenceCheckboxes)
+                    {
+                        if (GetEvidStateClass(checkbox.Id) == "o-state")
+                        {
+                            UpdateEvidenceActiveState(true);
+                        }
+                        else
+                        {
+                            UpdateEvidenceActiveState();
+                        }
+
+                        <div>
+                            <input type="checkbox" id="@checkbox.Id"
+                                @onchange="@(e => HandleCheckboxChange(checkbox.IndexNum, checkbox.Id, (bool)e.Value))"
+                                class="@GetEvidStateClass(checkbox.Id)"
+                                disabled="@(!checkbox.Active ? "disabled" : null)" />
+                            <label class="evidCheckBox" id="@checkbox.Id" for="@checkbox.Id"
+                                style="@(!checkbox.Active ? "color: #acab8b" : null)">@checkbox.Label</label>
+                        </div>
+                    }
+                </div>
+                <hr>
+                <div class="ghostButton-group">
+                    <div class="ghostHeader">Using the evidence we've found, we believe the ghost is a</div>
+                    <div class="button-container">
+                        @foreach (var ghostButton in ghostButtons)
+                        {
+                            UpdateGhostsActiveState();
+
+                            @* Console.WriteLine(ghostButton.Active); *@
+
+                            <div class="button-column">
+                                <div class="line"></div>
+                                <button @onclick="@(() => HandleButtonClick(ghostButton.IndexNum, ghostButton.Id))"
+                                    class="@GetGhostStateClass(ghostButton.Id)" style="@(!ghostButton.Active ? "color: #acab8b" : null)">@ghostButton.Label</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    @using Phasmo;
+
+    GhostTypes ghostTypes = new GhostTypes();
+
+    @* evidence *@
+
+    public class EvidenceCheckboxModel
+    {
+        public int IndexNum { get; set; }
+        public string Id { get; set; }
+        public string Label { get; set; }
+        public int PressCtr { get; set; }
+        public bool Active { get; set; } = true;
+
+        public EvidenceCheckboxModel(int indexNum, string id, string label, int pressCtr = 0)
+        {
+            IndexNum = indexNum;
+            Id = id;
+            Label = label;
+            PressCtr = pressCtr;
+        }
+
+        public GhostEvidence GetEvidenceEnum()
+        {
+            string tempString = Label.ToUpper();
+            tempString = tempString.Replace(" ", "_");
+            tempString = tempString.Replace(".", "");
+
+            GhostEvidence evidence;
+            Enum.TryParse(tempString, out evidence);
+            return evidence;
+        }
+    }
+
+    private List<EvidenceCheckboxModel> EvidenceCheckboxes = new List<EvidenceCheckboxModel>()
+{
+new EvidenceCheckboxModel(0, "checkbox-1", "EMF Level 5"),
+new EvidenceCheckboxModel(1, "checkbox-2", "D.O.T.S Projector"),
+new EvidenceCheckboxModel(2, "checkbox-3", "Ultraviolet"),
+new EvidenceCheckboxModel(3, "checkbox-4", "Ghost Orb"),
+new EvidenceCheckboxModel(4, "checkbox-5", "Ghost Writing"),
+new EvidenceCheckboxModel(5, "checkbox-6", "Spirit Box"),
+new EvidenceCheckboxModel(6, "checkbox-7", "Freezing Temperatures"),
+
+};
+
+    private Dictionary<string, bool> CheckedEvidenceCheckboxes = new Dictionary<string, bool>();
+
+    private void HandleCheckboxChange(int indexNum, string checkboxId, bool isChecked)
+    {
+        if (CheckedEvidenceCheckboxes.ContainsKey(checkboxId))
+        {
+            CheckedEvidenceCheckboxes[checkboxId] = isChecked;
+        }
+        else
+        {
+            CheckedEvidenceCheckboxes.Add(checkboxId, isChecked);
+        }
+
+        if (EvidenceCheckboxes[indexNum].PressCtr == 3)
+        {
+            EvidenceCheckboxes[indexNum].PressCtr = 0;
+        }
+
+        foreach (var checkbox in EvidenceCheckboxes)
+        {
+            if (checkbox.IndexNum == indexNum && checkbox.Id == checkboxId)
+            {
+                checkbox.PressCtr = (checkbox.PressCtr + 1) % 3;
+            }
+        }
+    }
+
+    private string GetEvidStateClass(string checkboxId)
+    {
+        foreach (var checkbox in EvidenceCheckboxes)
+        {
+            if (checkbox.Id == checkboxId)
+            {
+                GhostEvidence evidence = checkbox.GetEvidenceEnum();
+
+                switch (checkbox.PressCtr)
+                {
+                    case 0:
+                        return "normal-state";
+                    case 1:
+                        return "x-state";
+                    case 2:
+                        return "o-state";
+                    default:
+                        return "normal-state";
+                }
+            }
+        }
+        return "";
+    }
+
+    private void UpdateEvidenceActiveState(bool skipLock = false)
+    {
+        foreach (var checkbox in EvidenceCheckboxes)
+        {
+            GhostEvidence evidence = checkbox.GetEvidenceEnum();
+
+            if (checkbox.PressCtr == 1)
+            {
+                if (!ghostTypes.EvidenceList.Contains(evidence))
+                {
+                    ghostTypes.EvidenceList.Add(evidence);
+                }
+            }
+            else if (checkbox.PressCtr == 2)
+            {
+                if (ghostTypes.EvidenceList.Contains(evidence))
+                {
+                    ghostTypes.EvidenceList.Remove(evidence);
+                }
+
+                if (!ghostTypes.StruckOutEvidenceList.Contains(evidence))
+                {
+                    ghostTypes.StruckOutEvidenceList.Add(evidence);
+                }
+            }
+            else
+            {
+                if (ghostTypes.StruckOutEvidenceList.Contains(evidence))
+                {
+                    ghostTypes.StruckOutEvidenceList.Remove(evidence);
+                }
+            }
+
+            if (ghostTypes.GetSortedEvidence().Contains(checkbox.GetEvidenceEnum()))
+            {
+                checkbox.Active = true;
+            }
+            else
+            {
+                checkbox.Active = false;
+            }
+
+            if (skipLock)
+            {
+                checkbox.Active = true;
+            }
+        }
+    }
+
+    @* ghosts *@
+
+    public class GhostButtonsModel
+    {
+        public int IndexNum { get; set; }
+        public string Id { get; set; }
+        public string Label { get; set; }
+        public int PressCtr { get; set; }
+        public bool Active { get; set; } = true;
+
+        public GhostButtonsModel(int indexNum, string id, string label)
+        {
+            IndexNum = indexNum;
+            Id = id;
+            Label = label;
+        }
+
+        public Ghosts GetGhostEnum()
+        {
+            string tempString = Label.ToUpper();
+            tempString = tempString.Replace(" ", "_");
+            tempString = tempString.Replace(".", "");
+
+            Ghosts evidence;
+            Enum.TryParse(tempString, out evidence);
+            return evidence;
+        }
+    }
+
+    private List<GhostButtonsModel> ghostButtons = new List<GhostButtonsModel>()
+{
+new GhostButtonsModel(0, "btn-1", "Spirit"),
+new GhostButtonsModel(1, "btn-2", "Wraith"),
+new GhostButtonsModel(2, "btn-3", "Phantom"),
+new GhostButtonsModel(3, "btn-4", "Poltergeist"),
+new GhostButtonsModel(4, "btn-5", "Banshee"),
+new GhostButtonsModel(5, "btn-6", "Jinn"),
+new GhostButtonsModel(6, "btn-7", "Mare"),
+new GhostButtonsModel(7, "btn-8", "Revenant"),
+new GhostButtonsModel(8, "btn-9", "Shade"),
+new GhostButtonsModel(9, "btn-10", "Demon"),
+new GhostButtonsModel(10, "btn-11", "Yurei"),
+new GhostButtonsModel(11, "btn-12", "Oni"),
+new GhostButtonsModel(12, "btn-13", "Yokai"),
+new GhostButtonsModel(13, "btn-14", "Hantu"),
+new GhostButtonsModel(14, "btn-15", "Goryo"),
+new GhostButtonsModel(15, "btn-16", "Myling"),
+new GhostButtonsModel(16, "btn-17", "Onryo"),
+new GhostButtonsModel(17, "btn-18", "The Twins"),
+new GhostButtonsModel(18, "btn-19", "Raiju"),
+new GhostButtonsModel(19, "btn-20", "Obake"),
+new GhostButtonsModel(20, "btn-21", "The Mimic"),
+new GhostButtonsModel(21, "btn-22", "Moroi"),
+new GhostButtonsModel(22, "btn-23", "Deogen"),
+new GhostButtonsModel(23, "btn-24", "Thaye"),
+};
+
+    private void HandleButtonClick(int indexNum, string ghostId)
+    {
+        if (ghostButtons[indexNum].PressCtr == 3)
+        {
+            ghostButtons[indexNum].PressCtr = 0;
+        }
+
+        foreach (var ghostButton in ghostButtons)
+        {
+            if (ghostButton.IndexNum == indexNum && ghostButton.Id == ghostId)
+            {
+                ghostButton.PressCtr = (ghostButton.PressCtr + 1) % 3;
+            }
+        }
+    }
+
+    private string GetGhostStateClass(string ghostButtonId)
+    {
+        foreach (var ghostButton in ghostButtons)
+        {
+            if (ghostButton.Id == ghostButtonId)
+            {
+                Ghosts evidence = ghostButton.GetGhostEnum();
+
+                switch (ghostButton.PressCtr)
+                {
+                    case 0:
+                        return "normal-state";
+                    case 1:
+                        return "x-state";
+                    case 2:
+                        return "o-state";
+                    default:
+                        return "normal-state";
+                }
+            }
+        }
+        return "";
+    }
+
+
+    private void UpdateGhostsActiveState()
+    {
+        foreach (var ghostButton in ghostButtons)
+        {
+            if (ghostTypes.GetSortedPossibleGhosts().Contains(ghostButton.GetGhostEnum()))
+            {
+                ghostButton.Active = true;
+            }
+            else
+            {
+                ghostButton.Active = false;
+            }
+        }
+    }
+}
