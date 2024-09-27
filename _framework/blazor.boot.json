@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "phasmo",
   "resources": {
-    "hash": "sha256-2o0AdDWDQZSUJx3McYwf7rHn1PDklNHEkYtgNu2EMXY=",
+    "hash": "sha256-jDGbS1VITnUXORhYzl8fKd+8sNDxKlp3+CWGlgA08yI=",
     "jsModuleNative": {
       "dotnet.native.8.0.5.s1ec6s1sxo.js": "sha256-boyHe+0RMZDkzBKGhsrnXPhPg3oZ6UqJnTUzngJPjNY="
     },
@@ -31,7 +31,7 @@
       "Microsoft.Extensions.Primitives.wasm": "sha256-6187ynEahDlSLMBvD4vAmiLpZ3clRb5xu6rM7O8AxNo=",
       "Microsoft.JSInterop.wasm": "sha256-YrrPPJg6rA/Bmx1sladSdAwoqL78YSP+3xcjhBg0bnc=",
       "Microsoft.JSInterop.WebAssembly.wasm": "sha256-ZyIqQss3I64BQC2gc7JEDrkYq14vXKEXuw5vBJ5oFYM=",
-      "phasmo.wasm": "sha256-Dcc0BwltaThAytJnsu/ucdkNPK8H/8JcTm6zPm6DZpE=",
+      "phasmo.wasm": "sha256-fPnuQB5/GrBl+wG9cvV3Hlr6JmMupYwujvnSpZKw4JA=",
       "System.Collections.Concurrent.wasm": "sha256-hcJzzCFysdsZwkKtaDyF6EsGEfMnqT9u7dGZXk0jTMc=",
       "System.Collections.wasm": "sha256-n7lKyDj/dMCwCRn9e1x5GhWURKSO3+Wy1yF0g3UepeU=",
       "System.ComponentModel.wasm": "sha256-RLeTQOOEEy4QXGeQLyLNY8k+aaF4W/EDE4Gx/TW+zxY=",
