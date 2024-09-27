@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'Lazy Dog';
+    src: url('../fonts/lazy_dog.ttf')format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    /* font-size: 2rem; */
+    font-family: "Lazy Dog";
+    /* font-weight: normal; */
+    /* letter-spacing: 0.075rem; */
+    color: rgb(51, 51, 51);
+}
+
+.book {
+    margin-left: 0;
+}
+
+@media only screen and (max-width: 1000px) {
+    .book {
+        margin-left: 50rem;
+    }
+}
