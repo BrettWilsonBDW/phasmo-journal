@@ -240,7 +240,7 @@
 <div style="width: 100%;">
     <div class="containerMain" style="width: 100%;">
         <div class="book">
-            <div class="ghostInfo" style="font-size: 1.5rem;">
+            <div class="ghostInfo" style="font-size: 1.4rem;">
                 @if (currentSelectedGhost != "")
                 {
                     string tempString = currentSelectedGhost.ToLower().Replace(" ", "_");
@@ -286,7 +286,9 @@
                         else
                         {
                             UpdateEvidenceActiveState();
+                            UpdateEvidenceActiveState();
                         }
+
 
                         <div>
                             <input type="checkbox" id="@checkbox.Id"
